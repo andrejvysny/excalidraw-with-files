@@ -1,57 +1,66 @@
 
-import {Excalidraw, Footer, Sidebar, WelcomeScreen} from "@excalidraw/excalidraw";
+import {Button, Excalidraw, Footer, Sidebar, WelcomeScreen} from "@excalidraw/excalidraw";
 import {useState} from "react";
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Login from "./Login.jsx";
+import {useDataProvider} from "./DataProvider.jsx";
+import Files from "./Files.jsx";
+import axios from "axios";
+
+
 function App() {
 
     const UIOptions = {
         dockedSidebarBreakpoint: 0,
-
         canvasActions: {
             changeViewBackgroundColor: true,
             clearCanvas: true,
-            loadScene: false,
+            loadScene: true,
         },
     };
-    const [docked, setDocked] = useState(false);
+    const [docked, setDocked] = useState(true);
 
+    const {isAuth}=useDataProvider();
+
+    const [excalidrawAPI, setExcalidrawAPI] = useState(null);
 
     return (
         <>
+            <ToastContainer
+                position={"top-right"}
+                autoClose={3500}
+                newestOnTop
+                pauseOnFocusLoss={false}
+                theme={"colored"}
+            />
             <div style={{height: "100vh"}}>
                 <Excalidraw
-
+                    excalidrawAPI={(api) => setExcalidrawAPI(api)}
                     UIOptions={UIOptions}
                     initialData={{
                         appState: { showWelcomeScreen: true,},
                     }}>
 
-                    <WelcomeScreen />
 
-
-
-                    <Sidebar name="custom" docked={docked} onDock={setDocked}>
+                    <Sidebar name="my_files"  docked={docked} onDock={setDocked}>
                         <Sidebar.Header />
-                        <Sidebar.Tabs style={{ padding: "0.5rem" }}>
-                            <Sidebar.Tab tab="one">Tab one!</Sidebar.Tab>
-                            <Sidebar.Tab tab="two">Tab two!</Sidebar.Tab>
-                            <Sidebar.TabTriggers>
-                                <Sidebar.TabTrigger tab="one">One</Sidebar.TabTrigger>
-                                <Sidebar.TabTrigger tab="two">Two</Sidebar.TabTrigger>
-                            </Sidebar.TabTriggers>
-                        </Sidebar.Tabs>
+                        <div style={{padding: "0.5rem", textAlign:"center"}}>
+                            {isAuth ?  <Files api={excalidrawAPI}/> : <Login/>}
+                        </div>
                     </Sidebar>
 
                     <Footer>
                         <Sidebar.Trigger
-                            name="custom"
-                            tab="one"
+                            name="my_files"
                             style={{
                                 marginLeft: "0.5rem",
-                                background: "#70b1ec",
+                                background: "#db70ec",
                                 color: "white",
                             }}
                         >
-                            Load Files
+                            My Files
                         </Sidebar.Trigger>
                     </Footer>
 

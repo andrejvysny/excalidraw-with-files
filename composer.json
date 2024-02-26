@@ -7,6 +7,7 @@
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "api-platform/core": "^3.2",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
@@ -15,9 +16,11 @@
         "pentatrion/vite-bundle": "^6.4",
         "symfony/console": "6.4.*",
         "symfony/dotenv": "6.4.*",
+        "symfony/filesystem": "6.4.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.4.*",
         "symfony/runtime": "6.4.*",
+        "symfony/uid": "6.4.*",
         "symfony/yaml": "6.4.*"
     },
     "config": {

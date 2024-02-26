@@ -3,3 +3,56 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.login-form{
+
+
+    button{
+        width: 100% !important;
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    input{
+        margin-top: 20px;
+        width: inherit;
+    };
+}
+
+.files{
+
+    h3{
+        margin: 5px;
+    }
+
+    p{
+        margin: 3px;
+    }
+
+    .excalidraw-button{
+        padding: 0 30px;
+        background-color: #db70ec;
+        margin: auto;
+    }
+
+    .file{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 10px;
+        border: 1px solid rgb(220,220,220);
+        padding: 3px;
+        margin-bottom: 10px;
+
+        strong{
+            padding-left: 10px;
+        }
+        button{
+            float: right;
+            padding: 0 30px;
+            background-color: #db70ec;
+            margin: 0;
+        }
+    }
+}
+
