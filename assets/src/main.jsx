@@ -7,7 +7,7 @@ import { createRoot } from 'react-dom/client';
 import axios from "axios";
 import DataProvider from "./DataProvider.jsx";
 
-axios.defaults.baseURL = "http://localhost";
+axios.defaults.baseURL = "/";
 axios.defaults.headers.common['Accept'] = 'application/json';
 
 const container = document.getElementById('react');
