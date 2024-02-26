@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\DiagramFile;
 use App\Repository\DiagramFileRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpClient\Exception\ServerException;
@@ -20,7 +21,8 @@ use Symfony\Component\Uid\Uuid;
 class FilesController extends AbstractController
 {
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private DiagramFileRepository $diagramFileRepository)
+    public function __construct(private readonly EntityManagerInterface $entityManager, private DiagramFileRepository $diagramFileRepository,
+    private  LoggerInterface $logger)
     {
     }
 
@@ -138,6 +140,13 @@ class FilesController extends AbstractController
 
             return true;
         }catch (\Throwable $exception){
+            $this->logger->error('An error occurred while writing data.',[
+                'message'=>$exception->getMessage(),
+                'file'=>$exception->getFile(),
+                'code'=>$exception->getCode(),
+                'data'=>$filePath,
+            ]);
+
             return false;
         }
 

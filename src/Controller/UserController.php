@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,6 +46,15 @@ class UserController extends AbstractController
 
         $this->em->persist($user);
         $this->em->flush();
+
+        $filesystem = new Filesystem();
+
+        $userDirectory = $this->getParameter('public_directory')."/uploads/".$user->getStorage();
+
+        if (!$filesystem->exists($userDirectory)){
+            $filesystem->mkdir($userDirectory, 0700);
+            $filesystem->chown($userDirectory, 'www-data', true);
+        }
 
         return new JsonResponse(["message"=>"User successfully registered!"], Response::HTTP_CREATED);
     }
