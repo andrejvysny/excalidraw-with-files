@@ -1,6 +1,7 @@
 name: Deploy
 
 on:
+  push:
   workflow_dispatch:
 jobs:
 
@@ -8,7 +9,7 @@ jobs:
     name: Build assets
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Node.js
         uses: actions/setup-node@main
       - name: Install dependencies
@@ -26,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
