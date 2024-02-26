@@ -9,6 +9,9 @@ export default defineConfig({
         react(), // if you're using React */
         symfonyPlugin(),
     ],
+    define:{
+        'process.env.IS_PREACT': false,
+    },
     build: {
         rollupOptions: {
             input: {
