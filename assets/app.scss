@@ -36,13 +36,38 @@ body {
     }
 
     .file{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        min-height: 76px;
+        display: block;
         border-radius: 10px;
         border: 1px solid rgb(220,220,220);
         padding: 3px;
         margin-bottom: 10px;
+
+        .actions{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .save{
+                background-color: forestgreen;
+                &:hover{
+                    color: black;
+                    background-color: #00bb00;
+                }
+            }
+            .delete{
+                color: white;
+                background-color: darkred;
+
+                &:hover{
+                    color: black;
+                    background-color: red;
+                }
+            }
+            .load{
+                background-color: #0d5aa7;
+            }
+        }
 
         strong{
             padding-left: 10px;

@@ -59,23 +59,24 @@ function File({id,createdAt,name, path, api}) {
             toast.error("Could not save!");
             console.log(e);
         })
-
-
-
     }
 
 
     const deleteFile = ()=>{
-        axios({
-            method:"DELETE",
-            url:`/api/files/remove/${id}`,
-        }).then(r=>{
-            toast.success("Successfully Deleted!");
-            loadFiles();
-        }).catch(e=>{
-            toast.error("Could not save!");
-            console.log(e);
-        })
+
+        if (confirm("Are you sure you want to delete it?") === true) {
+            axios({
+                method:"DELETE",
+                url:`/api/files/remove/${id}`,
+            }).then(r=>{
+                toast.success("Successfully Deleted!");
+                loadFiles();
+            }).catch(e=>{
+                toast.error("Could not save!");
+                console.log(e);
+            })
+        }
+
     }
 
 
@@ -105,16 +106,18 @@ function File({id,createdAt,name, path, api}) {
             </div>
 
 
-            <div>
-                <button className="excalidraw-button delete" onClick={() => deleteFile()}>
-                    delete
+            <div className="actions">
+                <button className="excalidraw-button" onClick={() => loadFile(path)}>
+                    load
                 </button>
                 <button className="excalidraw-button save" onClick={() => save(path)}>
                     save
                 </button>
-                <button className="excalidraw-button" onClick={() => loadFile(path)}>
-                    load
+                <button className="excalidraw-button delete" onClick={() => deleteFile()}>
+                    delete
                 </button>
+
+
             </div>
 
         </div>
