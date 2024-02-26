@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+
+  cli:
+    image: ghcr.io/andrejvysny/php-cli:8.3
+    volumes:
+      - .:/var/www
+
+  web:
+    depends_on:
+      - database
+    image: ghcr.io/andrejvysny/php-apache:8.3
+    ports:
+      - "80:80"
+    environment:
+      APP_ENV: ${APP_ENV:-dev}
+      APP_SECRET: ${APP_SECRET}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+      JWT_PASSPHRASE: ${JWT_PASSPHRASE}
+      DATABASE_URL: postgresql://user:password@database:5432/app?serverVersion=16&charset=utf8
+    volumes:
+      - .:/var/www/html
+
+
+###> doctrine/doctrine-bundle ###
+  database:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_USER: ${POSTGRES_USER:-user}
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/postgresql/data:rw
+###< doctrine/doctrine-bundle ###
+
+volumes:
+###> doctrine/doctrine-bundle ###
+  database_data:
+###< doctrine/doctrine-bundle ###

@@ -1,0 +1,4 @@
+# config/routes/dev/pentatrion_vite.yaml
+_pentatrion_vite:
+  prefix: /build
+  resource: "@PentatrionViteBundle/Resources/config/routing.yaml"
