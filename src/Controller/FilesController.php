@@ -126,7 +126,6 @@ class FilesController extends AbstractController
 
             if (!$filesystem->exists($userDirectory)){
                 $filesystem->mkdir($userDirectory, 0700);
-                $filesystem->chown($userDirectory, 'www-data', true);
             }
 
 

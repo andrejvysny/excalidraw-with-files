@@ -53,7 +53,6 @@ class UserController extends AbstractController
 
         if (!$filesystem->exists($userDirectory)){
             $filesystem->mkdir($userDirectory, 0700);
-            $filesystem->chown($userDirectory, 'www-data', true);
         }
 
         return new JsonResponse(["message"=>"User successfully registered!"], Response::HTTP_CREATED);
