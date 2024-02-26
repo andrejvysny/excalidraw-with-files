@@ -5,45 +5,22 @@ on:
   workflow_dispatch:
 jobs:
 
-  build:
-    name: Build assets
+  deploy:
+    name: Deploy
+   # needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Set up Node.js
         uses: actions/setup-node@main
       - name: Install dependencies
         run: npm install
       - name: Build assets
         run: npm run build
-      - name: Archive Assets artifact
-        uses: actions/upload-artifact@main
-        with:
-          name: build
-          path: public/build
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           server: andrejvysny.sk
           username: draw.andrejvysny.sk
           password: ${{ secrets.FTP_PASS }}
-      - name: Download artifact
-        uses: actions/download-artifact@main
-        with:
-          name: build
-          path: public/build
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.2.0
-        with:
-          server: andrejvysny.sk
-          username: draw.andrejvysny.sk
-          password: ${{ secrets.FTP_PASS }}
-          local-dir: ./public/build/
-          server-dir: public/build/
