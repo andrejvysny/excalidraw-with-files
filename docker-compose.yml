@@ -13,6 +13,7 @@ services:
     image: ghcr.io/andrejvysny/php-apache:8.3
     ports:
       - "80:80"
+    user: "1000:1000" # Replace with your UID:GID
     environment:
       APP_ENV: ${APP_ENV:-dev}
       APP_SECRET: ${APP_SECRET}
