@@ -71,10 +71,10 @@ function App() {
                     UIOptions={UIOptions}
                     initialData={{
                         //appState: JSON.parse(localStorage.getItem('appState') ?? "{}"), //TODO: not working properly
-                        elements: JSON.parse(localStorage.getItem('elements') ?? "[]"),
-                        files: JSON.parse(localStorage.getItem('files') ?? "[]"),
+                        //elements: JSON.parse(localStorage.getItem('elements') ?? "[]"), //TODO: save not working after this
+                        //files: JSON.parse(localStorage.getItem('files') ?? "[]"),//TODO: save not working after this
                     }}
-                    onChange={onChange}
+                  //  onChange={onChange}
                 >
 
 
